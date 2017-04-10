@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '25.0.2'
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 23
+        versionCode 2
+        versionName "1.1"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    productFlavors {
+        main {
+        }
+        forAny {
+            minSdkVersion 1
+        }
+    }
+    android.libraryVariants.all { variant ->
+        task("putAar${variant.name.capitalize()}IntoUnityProject", type: Copy, dependsOn: "assemble${variant.name.capitalize()}") {
+            description = "${variant.name.capitalize()} ビルドして Unity プロジェクトに AAR を吐き出すよ"
+            from(buildDir.path + '/outputs/aar')
+            include("${project.name}-${variant.flavorName}-${variant.buildType.name}.aar")
+            into(rootDir.path +
+                    '/../../Unity/LibLauncherProxy/Assets/LibLauncherProxy/Plugins/Android')
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+}

@@ -1,0 +1,55 @@
+# Unity Scripts
+Assets/**/*.cs text diff=csharp
+Assets/**/*.js text
+
+# Shaders
+Assets/**/*.shader  text
+Assets/**/*.compute text
+
+# Mergable by UnityYAMLMerge
+Assets/**/*.unity  text
+Assets/**/*.prefab text
+
+# Compiled by Xcode
+Assets/**/Plugins/**/*.c   text diff=cpp
+Assets/**/Plugins/**/*.cpp text diff=cpp
+Assets/**/Plugins/**/*.h   text diff=objc
+Assets/**/Plugins/**/*.hpp text diff=cpp
+Assets/**/Plugins/**/*.m   text diff=objc
+Assets/**/Plugins/**/*.mm  text diff=objc
+
+# Text assets
+Assets/**/*.txt   text
+Assets/**/*.html  text diff=html
+Assets/**/*.htm   text diff=html
+Assets/**/*.xml   text
+Assets/**/*.bytes binary
+Assets/**/*.json  text
+Assets/**/*.csv   text
+Assets/**/*.yaml  text
+Assets/**/*.fnt   text
+
+# Other YAML assets
+Assets/**/*.anim               text
+Assets/**/*.controller         text
+Assets/**/*.cubemap            text
+Assets/**/*.flare              text
+Assets/**/*.fontsettings       text
+Assets/**/*.giparams           text
+Assets/**/*.guiskin            text
+Assets/**/*.mask               text
+Assets/**/*.mat                text
+Assets/**/*.mixer              text
+Assets/**/*.overrideController text
+Assets/**/*.physicMaterial     text
+Assets/**/*.physicsMaterial2D  text
+Assets/**/*.renderTexture      text
+Assets/**/*.shadervariants     text
+Assets/**/*.asset              text
+
+# Others
+Assets/**/*.meta           text
+ProjectSettings/**/*.asset text
+ProjectSettings/**/*.txt   text
+.gitattributes text
+.gitignore     text

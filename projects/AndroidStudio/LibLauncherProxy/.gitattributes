@@ -1,0 +1,12 @@
+.gitattributes     text
+.gitignore         text
+*.java             text diff=java
+#*.c                text diff=cpp
+#*.cpp              text diff=cpp
+#*.h                text diff=cpp
+*.xml              text
+*.gradle           text
+gradlew            text eol=lf
+gradlew.bat        text eol=crlf
+gradle.properties  text
+proguard-rules.pro text

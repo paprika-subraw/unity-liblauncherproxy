@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+UNITY=/Applications/Unity/Unity.app/Contents/MacOS/Unity
+
+cd `dirname $0`
+BASE_DIR=`pwd`
+
+# Gradle
+cd projects/AndroidStudio/LibLauncherProxy
+./gradlew :liblauncherproxy:clean :liblauncherproxy:putAarMainReleaseIntoUnityproject :liblauncherproxy:putAarForAnyReleaseIntoUnityproject
+cd "$BASE_DIR"
+
+# Unity
+$UNITY -batchmode -projectPath "$BASE_DIR/projects/Unity/LibLauncherProxy" -exportPackage Assets/LibLauncherProxy/Plugins/Android/liblauncherproxy-main-release.aar "$BASE_DIR/LibLauncherProxyForMarshmallow.unitypackage" -quit
+$UNITY -batchmode -projectPath "$BASE_DIR/projects/Unity/LibLauncherProxy" -exportPackage Assets/LibLauncherProxy/Plugins/Android/liblauncherproxy-forAny-release.aar "$BASE_DIR/LibLauncherProxy.unitypackage" -quit
