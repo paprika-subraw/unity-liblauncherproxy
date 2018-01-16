@@ -16,41 +16,41 @@ Unity 製アプリで複数のアクティビティを使おうとすると、 `
 動作環境
 -------------------------------------------------------------------------------
 
-*   Unity 5.x
-*   Android バージョン不問…?
+* Unity 5.x
+* Android バージョン不問…?
 
 動作確認済み環境:
 
-*   Android 4.0 以上 公式エミュレーター
-*   Android 4.2.2, 6.0 実機
+* Android 4.0 以上 公式エミュレーター
+* Android 4.2.2, 6.0 実機
 
 処理内容的には大きく分けて以下のパターンで違うことをやってるので、それぞれテスト推奨です。
 
-*   Android 3 未満 (API Lv. 10 Gingerbread MR1 以下)
-*   Android 3〜4 (API Lv. 11 Honeycomb 〜 19 KitKat)
-*   Android 5.x (API Lv. 21 Lollipop 〜 Lv. 22 Lollipop MR1)
-*   Android 6 以上 (API Lv. 23 Marshmallow 以上)
+* Android 3 未満 (API Lv. 10 Gingerbread MR1 以下)
+* Android 3〜4 (API Lv. 11 Honeycomb 〜 19 KitKat)
+* Android 5.x (API Lv. 21 Lollipop 〜 Lv. 22 Lollipop MR1)
+* Android 6 以上 (API Lv. 23 Marshmallow 以上)
 
 ※ Android 4.4W (API Lv. 20 KitKat Watch) はウェアラブル端末用らしいので保証対象外
 
 内容物
 -------------------------------------------------------------------------------
 
-*   __projects/AndroidStudio/LibLauncherProxy/__ … Android AAR のソース (Gradle@AndroidStudio)
-*   __projects/Unity/LibLauncherProxy/__ … AAR をアセット化してエクスポートするための Unity プロジェクト
-*   __LibLauncherProxy.unitypackage__ … ビルド済みのアセット (インストールに使います)
-*   __LibLauncherProxyForMarshmallow.unitypackage__ … ビルド済みのアセット (Android 6 以上しかサポートしないアプリ用)
-*   __LICENSE__ … ライセンス
-*   __README.md__ … これ
-*   __build__ … ビルドスクリプト (macOS 用)
-*   __build.bat__ … ビルドスクリプト (Windows 用; バッチスクリプト版)
-*   __build.ps1__ … ビルドスクリプト (Windows 用; PowerShell 版)
+* __projects/AndroidStudio/LibLauncherProxy/__ … Android AAR のソース (Gradle@AndroidStudio)
+* __projects/Unity/LibLauncherProxy/__ … AAR をアセット化してエクスポートするための Unity プロジェクト
+* __LibLauncherProxy.unitypackage__ … ビルド済みのアセット (インストールに使います)
+* __LibLauncherProxyForMarshmallow.unitypackage__ … ビルド済みのアセット (Android 6 以上しかサポートしないアプリ用)
+* __LICENSE__ … ライセンス
+* __README.md__ … これ
+* __build__ … ビルドスクリプト (macOS 用)
+* __build.bat__ … ビルドスクリプト (Windows 用; バッチスクリプト版)
+* __build.ps1__ … ビルドスクリプト (Windows 用; PowerShell 版)
 
 Install
 -------------------------------------------------------------------------------
 
-1.  'LibLauncherProxy.unitypackage' を Unity プロジェクトにインポート。
-1.  同プロジェクト内 'AndroidManifest.xml' から以下のような記述を含んだ `<activity>` 要素を探し…
+1. 'LibLauncherProxy.unitypackage' を Unity プロジェクトにインポート。
+1. 同プロジェクト内 'AndroidManifest.xml' から以下のような記述を含んだ `<activity>` 要素を探し…
 
     ```xml
     <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
@@ -135,10 +135,10 @@ Permissions
 このプラグインを入れると、アプリが以下のパーミッションを要求するようになります。
 （いずれも dangerous ではありません。)
 
-*   `android.permission.GET_TASKS` … 実行中のアプリの取得
-   *   Android 6 (API Lv. 23) 以上では不要なので、そのバージョンしかサポートしないアプリに導入するなら改造推奨。
-*   `android.permission.REORDER_TASKS` … 実行中のアプリの順序変更
-   *   Android 3 (API Lv. 11) 未満では不要らしいが、今時 Android 3 以上をサポート対象外にすることは考え難いためほぼ必須。
+* `android.permission.GET_TASKS` … 実行中のアプリの取得
+    * Android 6 (API Lv. 23) 以上では不要なので、そのバージョンしかサポートしないアプリに導入するなら改造推奨。
+* `android.permission.REORDER_TASKS` … 実行中のアプリの順序変更
+    * Android 3 (API Lv. 11) 未満では不要らしいが、今時 Android 3 以上をサポート対象外にすることは考え難いためほぼ必須。
 
 ビルド方法
 -------------------------------------------------------------------------------
