@@ -27,6 +27,7 @@ public class LauncherProxyActivity extends Activity {
     private static class TopActivityInfo {
         /**
          * このアクティビティが属するタスクの ID です。
+         * ただし、所属タスクが実行中でない時は {@code -1} になります。
          */
         final int taskId;
 
@@ -41,7 +42,8 @@ public class LauncherProxyActivity extends Activity {
          * @param taskInfo タスク情報
          */
         TopActivityInfo(ActivityManager.RunningTaskInfo taskInfo) {
-            this.taskId = taskInfo.id;
+            // numRunning == 0 はタスクが見つかりはしたけど既に終了しているケース
+            this.taskId = taskInfo.numRunning != 0 ? taskInfo.id : -1;
             this.componentName = taskInfo.topActivity;
         }
 
@@ -109,7 +111,7 @@ public class LauncherProxyActivity extends Activity {
 
             // 見つかったら、それを前面に出す
             if (topActivityInfo != null) {
-                // このアクティビティ自体の所属タスクがそれであれば閉じる
+                // このアクティビティ自体の所属タスクがそれであれば何もしない
                 if (getTaskId() == topActivityInfo.taskId) {
                     Log.d("LibLauncherProxy", "Found my own task");
                     return;
@@ -126,10 +128,11 @@ public class LauncherProxyActivity extends Activity {
                     ActivityManager activityManager = (ActivityManager)
                             this.getSystemService(ACTIVITY_SERVICE);
 
-                    activityManager.moveTaskToFront(topActivityInfo.taskId,
-                            0);
-                    Log.d("LibLauncherProxy", "Found an old task");
-                    return;
+                    if (activityManager != null) {
+                        activityManager.moveTaskToFront(topActivityInfo.taskId, 0);
+                        Log.d("LibLauncherProxy", "Found an old task");
+                        return;
+                    }
                 }
                 // moveTaskToFront できなければ直接インテント送る
                 if (topActivityInfo.componentName != null) {
@@ -171,6 +174,9 @@ public class LauncherProxyActivity extends Activity {
     private TopActivityInfo searchTask(Context appContext, ActivityInfo activity) {
         ActivityManager activityManager = (ActivityManager)
                 appContext.getSystemService(ACTIVITY_SERVICE);
+        if (activityManager == null) {
+            return null;
+        }
 
         // ロリポップ以前の場合
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
@@ -199,10 +205,6 @@ public class LauncherProxyActivity extends Activity {
                                 .equals(activity.applicationInfo.packageName) &&
                         taskInfo.baseActivity.getClassName()
                                 .equals(activity.name)) {
-                    // タスクが見つかりはしたけど既に終了しているケース
-                    if (taskInfo.numRunning == 0) {
-                        return null;
-                    }
                     return new TopActivityInfo(taskInfo);
                 }
             }
