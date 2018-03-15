@@ -78,31 +78,20 @@ Install
     <?xml version="1.0" encoding="utf-8"?>
     <manifest
         xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.unity3d.player"
-        android:installLocation="preferExternal"
-        android:versionCode="1"
-        android:versionName="1.0">
-        <supports-screens
-            android:smallScreens="true"
-            android:normalScreens="true"
-            android:largeScreens="true"
-            android:xlargeScreens="true"
-            android:anyDensity="true"/>
-
+        xmlns:tools="http://schemas.android.com/tools">
         <application
-            android:theme="@style/UnityThemeSelector"
-            android:icon="@drawable/app_icon"
             android:label="@string/app_name"
-            android:debuggable="true">
-            <activity android:name="com.unity3d.player.UnityPlayerActivity"
-                      android:label="@string/app_name">
+            android:icon="@drawable/app_icon">
+            <activity android:name="com.unity3d.player.UnityPlayerActivity">
                 <!-- ↓ LibLauncherProxy に含まれるため不要
                 <intent-filter>
                     <action android:name="android.intent.action.MAIN" />
                     <category android:name="android.intent.category.LAUNCHER" />
                 </intent-filter>
                 -->
-                <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+                <meta-data
+                    android:name="unityplayer.UnityActivity"
+                    android:value="true" />
             </activity>
         </application>
     </manifest>
